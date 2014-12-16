@@ -27,7 +27,7 @@
     <artifactId>jjwt</artifactId>
     <version>0.5-SNAPSHOT</version>
     <name>JSON Web Token support for the JVM</name>
-    <packaging>jar</packaging>
+    <packaging>aar</packaging>
 
     <licenses>
         <license>
@@ -60,6 +60,8 @@
         <jdk.version>1.6</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <buildNumber>${user.name}-${maven.build.timestamp}</buildNumber>
+
+        <android.version>4.1.1.4</android.version>
 
         <slf4j.version>1.7.6</slf4j.version>
         <jackson.version>2.4.2</jackson.version>
@@ -95,6 +97,19 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+           <groupId>com.google.android</groupId>
+           <artifactId>android</artifactId>
+           <version>${android.version}</version>
+           <scope>provided</scope>
+           <exclusions>
+               <exclusion>
+                   <groupId>commons-logging</groupId>
+                   <artifactId>commons-logging</artifactId>
+               </exclusion>
+           </exclusions>
         </dependency>
 
         <!-- Optional Dependencies: -->
@@ -135,6 +150,18 @@
     </dependencies>
 
     <build>
+        <sourceDirectory>src</sourceDirectory>
+        <finalName>${project.artifactId}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                    <artifactId>android-maven-plugin</artifactId>
+                    <version>3.8.2</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -181,6 +208,16 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <configuration>
+                    <sdk>
+                        <!-- platform as api level (api level 15 = platform 4.0.3)-->
+                        <platform>15</platform>
+                    </sdk>
                 </configuration>
             </plugin>
             <!-- Allow for writing tests in Groovy: -->
