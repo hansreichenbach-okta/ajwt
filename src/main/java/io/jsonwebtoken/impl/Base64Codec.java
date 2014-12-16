@@ -15,18 +15,18 @@
  */
 package io.jsonwebtoken.impl;
 
-import javax.xml.bind.DatatypeConverter;
+import android.util.Base64;
 
 public class Base64Codec extends AbstractTextCodec {
 
     @Override
     public String encode(byte[] data) {
-        return DatatypeConverter.printBase64Binary(data);
+        return Base64.encodeToString(data, Base64.DEFAULT);
     }
 
     @Override
     public byte[] decode(String encoded) {
-        return DatatypeConverter.parseBase64Binary(encoded);
+        return Base64.decode(encoded, Base64.DEFAULT);
     }
 
 }

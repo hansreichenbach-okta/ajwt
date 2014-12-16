@@ -16,3 +16,6 @@ target/
 *.iml
 *.iws
 
+# Mac nonsense
+.DS_Store
+
