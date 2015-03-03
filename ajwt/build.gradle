@@ -1,0 +1,107 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.0.1'
+        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.5'
+        //classpath 'org.robolectric:robolectric-gradle-plugin:0.14.1'
+    }
+}
+
+apply plugin: 'com.android.library'
+//apply plugin: 'robolectric'
+apply plugin: 'groovyx.grooid.groovy-android'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile 'org.slf4j:slf4j-api:1.7.10'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
+    //TODO add the spongycastle dependency?
+    // Unit Test libraries
+    androidTestCompile 'org.easymock:easymock:3.1'
+    androidTestCompile 'org.testng:testng:6.8'
+    androidTestCompile 'org.codehaus.groovy:groovy:2.4.1:grooid'
+    /*androidTestCompile('junit:junit:4.11') {
+            exclude module: 'hamcrest-core'
+        }*/
+    /*androidTestCompile('org.robolectric:robolectric:2.3') {
+            exclude module: 'classworlds'
+            exclude module: 'commons-logging'
+            exclude module: 'httpclient'
+            exclude module: 'maven-artifact'
+            exclude module: 'maven-artifact-manager'
+            exclude module: 'maven-error-diagnostics'
+            exclude module: 'maven-model'
+            exclude module: 'maven-project'
+            exclude module: 'maven-settings'
+            exclude module: 'plexus-container-default'
+            exclude module: 'plexus-interpolation'
+            exclude module: 'plexus-utils'
+            exclude module: 'wagon-file'
+            exclude module: 'wagon-http-lightweight'
+            exclude module: 'wagon-provider-api'
+        }*/
+}
+
+// extend the runtime
+configurations {
+    unitTestCompile.extendsFrom runtime
+    unitTestRuntime.extendsFrom unitTestCompile
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '21.1.2'
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode 1
+        versionName "0.1.0"
+
+        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+    }
+
+    sourceSets {
+        /*main {
+
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+
+        } */
+
+        androidTest.setRoot('src/androidTest')
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
+    //robolectric {
+    //    include '**/*Test.class'
+    //}
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
