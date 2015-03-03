@@ -1,18 +1,18 @@
 buildscript {
     repositories {
         mavenCentral()
-        jcenter()
+        //jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.1'
-        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.5'
-        //classpath 'org.robolectric:robolectric-gradle-plugin:0.14.1'
+        //classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.5'
+        classpath 'org.robolectric:robolectric-gradle-plugin:0.14.1'
     }
 }
 
 apply plugin: 'com.android.library'
-//apply plugin: 'robolectric'
-apply plugin: 'groovyx.grooid.groovy-android'
+apply plugin: 'robolectric'
+//apply plugin: 'groovyx.grooid.groovy-android'
 
 repositories {
     mavenCentral()
@@ -23,14 +23,15 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.10'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
     //TODO add the spongycastle dependency?
+
     // Unit Test libraries
     androidTestCompile 'org.easymock:easymock:3.1'
     androidTestCompile 'org.testng:testng:6.8'
-    androidTestCompile 'org.codehaus.groovy:groovy:2.4.1:grooid'
+    //androidTestCompile 'org.codehaus.groovy:groovy:2.4.1:grooid'
     /*androidTestCompile('junit:junit:4.11') {
             exclude module: 'hamcrest-core'
         }*/
-    /*androidTestCompile('org.robolectric:robolectric:2.3') {
+    androidTestCompile('org.robolectric:robolectric:2.3') {
             exclude module: 'classworlds'
             exclude module: 'commons-logging'
             exclude module: 'httpclient'
@@ -46,7 +47,7 @@ dependencies {
             exclude module: 'wagon-file'
             exclude module: 'wagon-http-lightweight'
             exclude module: 'wagon-provider-api'
-        }*/
+        }
 }
 
 // extend the runtime
@@ -81,7 +82,7 @@ android {
 
         } */
 
-        androidTest.setRoot('src/androidTest')
+        androidTest.setRoot('src/test')
 
         // Move the tests to tests/java, tests/res, etc...
         instrumentTest.setRoot('tests')
@@ -96,9 +97,9 @@ android {
         release.setRoot('build-types/release')
     }
 
-    //robolectric {
-    //    include '**/*Test.class'
-    //}
+    robolectric {
+        include '**/*Test.class'
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
