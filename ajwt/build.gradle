@@ -1,18 +1,15 @@
 buildscript {
     repositories {
         mavenCentral()
-        //jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.1'
-        //classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.5'
         classpath 'org.robolectric:robolectric-gradle-plugin:0.14.1'
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'robolectric'
-//apply plugin: 'groovyx.grooid.groovy-android'
 
 repositories {
     mavenCentral()
@@ -26,11 +23,11 @@ dependencies {
 
     // Unit Test libraries
     androidTestCompile 'org.easymock:easymock:3.1'
-    androidTestCompile 'org.testng:testng:6.8'
-    //androidTestCompile 'org.codehaus.groovy:groovy:2.4.1:grooid'
+    //androidTestCompile 'org.testng:testng:6.8'
+    androidTestCompile 'junit:junit:4.11'
     /*androidTestCompile('junit:junit:4.11') {
             exclude module: 'hamcrest-core'
-        }*/
+    }*/
     androidTestCompile('org.robolectric:robolectric:2.3') {
             exclude module: 'classworlds'
             exclude module: 'commons-logging'

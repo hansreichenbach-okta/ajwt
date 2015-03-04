@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/jwtk/jjwt.svg?branch=master)](https://travis-ci.org/jwtk/jjwt)
 
-# Java JWT: JSON Web Token for Java
+# Android JWT: JSON Web Token for Android
 
-JJWT aims to be the easiest to use and understand library for creating and verifying JSON Web Tokens (JWTs) on the JVM.
+AJWT aims to be the easiest to use and understand library for creating and verifying JSON Web Tokens (JWTs) on Android. This project is derived from the JJWT Library for the JVM. All credit for the implementation goes to those guys, this project simply converts their work so it can be used on Android.
 
 JJWT is a 'clean room' implementation based solely on the [JWT](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25), [JWS](https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-31), [JWE](https://tools.ietf.org/html/draft-ietf-jose-json-web-encryption-31) and [JWA](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31) RFC draft specifications.
 
